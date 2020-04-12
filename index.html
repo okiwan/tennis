@@ -6,11 +6,53 @@
     <script type="text/javascript">
       // This next line prepares for the LiveReload connection
       document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
-      console.log("Hello, world!");
+
+      // Program starts here...
+      var canvas;
+      var canvasContext;
+
+      var ballX = 50;
+      var ballY = 50;
+
+      window.onload = () => {
+        console.log("Initializing canvas...");
+        canvas = document.getElementById("gameCanvas");
+        canvasContext = canvas.getContext("2d");
+
+        var framesPerSecond = 30;
+        setInterval(function() {
+          moveEverything();
+          drawEverything();
+        }, 1000/framesPerSecond);
+      }
+
+      function drawEverything() {
+        canvasContext.fillStyle = 'black';
+        canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+        canvasContext.fillStyle = 'red';
+        canvasContext.fillRect(ballX, ballY, 20, 20);
+        canvasContext.fillStyle = 'white';
+        canvasContext.fillRect(0, 0, 10, 100);
+      }
+
+      function moveEverything() {
+        ballX += 5;
+      }
     </script>
+    <style>
+      #gameCanvas {
+        height: 600px;
+        left: 50%;
+        margin-left: -400px;
+        margin-top: -300px;
+        position: fixed;
+        top: 50%;
+        width: 800px;
+      }
+    </style>
   </head>
   <body>
-    ¡Y aquí estamos!
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
   </body>
 </html>
 
